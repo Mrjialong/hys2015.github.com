@@ -3,6 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>俄罗斯方块</title>
+	<link rel="stylesheet" href="stylesheets/font-awesome/font-awesome.min.css">
+	<!--[if IE 7]>
+	<link rel="stylesheet" href="stylesheets/font-awesome/font-awesome-ie7.min.css">
+	<![endif]-->
 	<style type="text/css">
 		canvas{
 			border:1px solid #000;
@@ -36,19 +40,25 @@
 		<div class='intro'>说明：方向键←→控制方向，↓加速，↑顺时针旋转方块</div>
 		<canvas id='mycanvas' width='260' height='400'>
 			您的浏览器不支持canvas
+			<div>
+				abde
+			</div>
 		</canvas>
 		<canvas id='preview' width='80' height='80'>
 			您的浏览器不支持canvas
 		</canvas>	
 		<div class="keys">
 			<button id='startGame'>
-				开始游戏
+				开始
+				<i class="icon-play"></i>
 			</button>
 			<button id='pause'>
 				暂停
+				<i class="icon-pause"></i>
 			</button>
 			<button id='restart'>
 				重新开始
+				<i class="icon-play-circle"></i>
 			</button>
 		</div>
 		

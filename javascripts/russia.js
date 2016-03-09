@@ -234,7 +234,7 @@ function keybind(e){ //按键绑定
 
 function animate(){
 	if(!gameOver&&!gamePause){
-		setTimeout(function(){animate()},800);
+		setTimeout(function(){animate()},delay - score > 200 ? delay - score * 10 : 200);
 		model.down();
 	}
 }
@@ -249,10 +249,12 @@ var gameInit = function(){
 	score = 0;
 	gameOver = false;
 	gamePause = true;
+	delay = 800;
 }
 //游戏开始
 var model;
 var score;
+var delay;
 var gamePause;
 var gameOver;
 gameInit();
@@ -284,7 +286,8 @@ restart.disabled = true;
 restart.onclick = function(){
 	if(window.confirm("确定要重新开始吗？")){
 		gameInit();
-		start.click();
+		score_txt.innerHTML = score;
+		//start.click();
 	}else{
 		return false;
 	}
