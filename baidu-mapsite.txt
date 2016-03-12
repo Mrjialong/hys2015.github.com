@@ -1,0 +1,6 @@
+http://www.hengyishu.cn/index.html
+http://www.hengyishu.cn/blog/2016/03/12/Qt5-5-Visual-Studio2013-%E7%BB%93%E5%90%88/index.html
+http://www.hengyishu.cn/blog/2016/03/09/GitHub-Pages-Hexo-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/index.html
+http://www.hengyishu.cn/blog/tags/
+http://www.hengyishu.cn/blog/categories/
+http://www.hengyishu.cn/blog/archives/
