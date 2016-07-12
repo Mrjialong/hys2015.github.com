@@ -250,7 +250,51 @@ var gameInit = function(){
 	gameOver = false;
 	gamePause = true;
 	delay = 800;
+	VirtualCtrlsInit();
 }
+
+//虚拟控制器
+var VControls = new Array();
+var VirtualCtrlsInit = function(){
+	var LCtrl = document.getElementById("left");
+	LCtrl.onclick = function(){
+		model.left();
+	}
+	VControls.push(LCtrl);
+	LCtrl = document.getElementById("right");
+	LCtrl.onclick = function(){
+		model.right();
+	}
+	VControls.push(LCtrl);
+	LCtrl = document.getElementById("up");
+	LCtrl.onclick = function(){
+		model.rotate();
+	}
+	VControls.push(LCtrl);
+	LCtrl = document.getElementById("down");
+	LCtrl.onclick = function(){
+		model.down();
+	}
+	VControls.push(LCtrl);
+
+	DisabledVCtrls();
+}
+
+var EnableVCtrls = function(){
+	for(var i = 0; i < 4; ++i)
+	{
+		VControls[i].disabled = false;
+	}
+}
+
+var DisabledVCtrls = function(){
+	for(var i = 0; i < 4; ++i)
+	{
+		VControls[i].disabled = true;
+	}
+}
+
+
 //游戏开始
 var model;
 var score;
@@ -269,6 +313,8 @@ start.onclick = function(){
 	pause.disabled = false;
 	restart.disabled = true;
 	this.disabled = true;
+
+	EnableVCtrls();
 }
 //暂停
 var pause = document.getElementById("pause");
@@ -279,6 +325,8 @@ pause.onclick = function(){
 	this.disabled = true;
 	restart.disabled = false;
 	start.disabled = false;
+
+	DisabledVCtrls();
 }
 
 var restart = document.getElementById("restart");

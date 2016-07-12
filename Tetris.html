@@ -7,7 +7,11 @@
 	<!--[if IE 7]>
 	<link rel="stylesheet" href="stylesheets/font-awesome/font-awesome-ie7.min.css">
 	<![endif]-->
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<style type="text/css">
+		button{
+			padding: 5px;
+		}
 		canvas{
 			border:1px solid #000;
 			padding:2px;
@@ -29,6 +33,20 @@
 			border:1px solid #aaa;
 			box-shadow: 0 0 5px #000;
 		}
+		.vctrls{
+			display: none;
+		}
+
+		@media screen and (max-device-width: 768px) {
+			.vctrls{
+				display: block;
+				margin-bottom: 5px;
+			}
+			.vctrls button{
+				padding:10px;
+				margin: 2px;
+			}
+		}
 	</style>
 </head>
 <body>
@@ -47,6 +65,21 @@
 		<canvas id='preview' width='80' height='80'>
 			您的浏览器不支持canvas
 		</canvas>	
+		<div class="vctrls">
+			<button id="up">
+				<i class="icon-arrow-up"></i>
+			</button>
+			<br>
+			<button id="left">
+				<i class="icon-arrow-left"></i>
+			</button>
+			<button id="down">
+				<i class="icon-arrow-down"></i>
+			</button>
+			<button id="right">
+				<i class="icon-arrow-right"></i>
+			</button>
+		</div>
 		<div class="keys">
 			<button id='startGame'>
 				开始
