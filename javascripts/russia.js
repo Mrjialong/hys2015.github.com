@@ -118,16 +118,16 @@
 			default:break;
 		}
 	}
-	update_score();  //更新到UI
+	update_score(ctx);  //更新到UI
  }
 
  //绘制图形
- var spacing = 20;
+ var spacing = canvas.getAttribute("width") / 10;
  //画小方块
  function drawRect(color,ctx,x,y){
  	ctx.save();
  	ctx.fillStyle = color;
- 	ctx.fillRect(x,y,spacing-2,spacing-2);   //后两个参数是width和height
+ 	ctx.fillRect(x,y,spacing * 0.9,spacing * 0.9);   //后两个参数是width和height
  	ctx.restore();
  }
  //渲染Canvas
@@ -169,7 +169,7 @@ var GameModel = function(w,h){
 }
 
 GameModel.prototype.born = function(){
-	while(this.IDqueue.length<2){
+	while(this.IDqueue.length < 2){
 		this.IDqueue.push(Math.floor(Math.random()*7)+1);
 	}
 	var prevID = this.IDqueue[1];
@@ -239,13 +239,13 @@ function animate(){
 	}
 }
 
-function update_score(){
+function update_score(ctx){
 	score_txt.innerHTML = score;
 }
 
 //游戏初始化
 var gameInit = function(){
-	model = new GameModel(13,20);
+	model = new GameModel(10,18);
 	score = 0;
 	gameOver = false;
 	gamePause = true;
@@ -340,3 +340,5 @@ restart.onclick = function(){
 		return false;
 	}
 }
+
+window.onblur = pause.onclick;

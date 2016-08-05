@@ -9,15 +9,7 @@
 	<![endif]-->
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<style type="text/css">
-		button{
-			padding: 5px;
-		}
-		canvas{
-			border:1px solid #000;
-			padding:2px;
-		}
 		.main{
-			width:70%;
 			margin:0 auto;
 			text-align:center;
 		}
@@ -29,22 +21,46 @@
 		.fleft{
 			float:right;
 		}
+		button{
+			padding: 5px;
+		}
+		canvas#mycanvas{
+			/*position: absolute;*/
+			border:1px solid #000;
+			padding:2px;
+		}
+		canvas#preview{
+			border: 1px solid gray;
+		}
 		span.score{
 			border:1px solid #aaa;
 			box-shadow: 0 0 5px #000;
+			font-family: "MS Yahei";
+			font-size: 2;
 		}
 		.vctrls{
 			display: none;
 		}
 
 		@media screen and (max-device-width: 768px) {
+			.main{
+				width:100%;
+				margin:0;
+				text-align: left;
+			}
 			.vctrls{
+				
 				display: block;
-				margin-bottom: 5px;
+				bottom:0;
 			}
 			.vctrls button{
 				padding:10px;
 				margin: 2px;
+				font-size: 4em;
+				opacity: 0.5;
+			}
+			canvas#preview{
+				float:left;
 			}
 		}
 	</style>
@@ -54,32 +70,7 @@
 		<div></div>
 		<div></div>
 		<p class='title'>俄罗斯方块</p>
-		<p class='score' >得分:<span id='score' class='score'>0</span></p>
 		<div class='intro'>说明：方向键←→控制方向，↓加速，↑顺时针旋转方块</div>
-		<canvas id='mycanvas' width='260' height='400'>
-			您的浏览器不支持canvas
-			<div>
-				abde
-			</div>
-		</canvas>
-		<canvas id='preview' width='80' height='80'>
-			您的浏览器不支持canvas
-		</canvas>	
-		<div class="vctrls">
-			<button id="up">
-				<i class="icon-arrow-up"></i>
-			</button>
-			<br>
-			<button id="left">
-				<i class="icon-arrow-left"></i>
-			</button>
-			<button id="down">
-				<i class="icon-arrow-down"></i>
-			</button>
-			<button id="right">
-				<i class="icon-arrow-right"></i>
-			</button>
-		</div>
 		<div class="keys">
 			<button id='startGame'>
 				开始
@@ -94,8 +85,50 @@
 				<i class="icon-play-circle"></i>
 			</button>
 		</div>
-		
+		<p id = 'scorePane'>
+			<span id='score' class='score'>0</span>
+		</p>
+		<canvas id='mycanvas' width='260' height='400'>
+			您的浏览器不支持canvas(游戏)
+		</canvas>
+		<canvas id='preview' width='80' height='80'>
+			您的浏览器不支持canvas(提示)
+		</canvas>	
+		<div class="vctrls" id="vctrls">
+			<button id="left">
+				<i class="icon-arrow-left"></i>
+			</button>
+			<button id="down">
+				<i class="icon-arrow-down"></i>
+			</button>
+			<button id="right">
+				<i class="icon-arrow-right"></i>
+			</button>
+			<button id="up">
+				<i class="icon-rotate-right"></i>
+			</button>
+		</div>
 	</div>
+	<script type="text/javascript">
+		var gameCanvas = document.getElementById("mycanvas");
+		var prevCanvas = document.getElementById("preview");
+		var scorePane = document.getElementById("scorePane");
+		if(window.innerHeight <= 768){
+			var btns = document.getElementById("vctrls").getElementsByTagName("button");
+			for( var i = 0 ; i < 4 ; ++i){
+				btns[i].width = window.innerWidth / 4 ;
+				btns[i].heigth = window.innerWidth / 4;
+			}
+		}
+		var gamePaneHeight = window.innerHeight - scorePane.offsetTop - scorePane.clientTop;
+		gamePaneHeight *= 0.7;
+		gameCanvas.setAttribute("height", gamePaneHeight);
+		var gamePaneWidth = gamePaneHeight * 10 / 18;
+		gameCanvas.setAttribute("width", gamePaneWidth);
+		var prevPaneLong = gamePaneWidth / 10 * 4;
+		prevCanvas.setAttribute("height",prevPaneLong);
+		prevCanvas.setAttribute("width", prevPaneLong);
+	</script>
 	<script type="text/javascript" src="javascripts/russia.js"></script>
 </body>
 </html>
