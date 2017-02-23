@@ -41,6 +41,37 @@
 		color:#aaa;
 		text-decoration:none;
 	}
+	/*weather style*/
+	.weather-content *{
+		border: none;
+	    font-size: 13px;
+	    margin: 0.2em;
+	    vertical-align: middle;
+	}
+	.weather-content img{
+		height:2em;
+		width:2em;
+	}
+	.weather-content span{
+		line-height: 100%;
+	}
+	.weather-content p.city{
+		font-size:1.5em;
+		padding-bottom: 0.7em;
+		border-bottom: 1px solid #eee;
+	}
+	.weather-content #cname {
+	    font-size: inherit;
+	}
+	.weather-content #condi-img{
+		float:right;
+		height:4em;
+		width:4em;
+	}
+	.weather-content #degree{
+		font-size: 2em;
+		font-style:bold;
+	}
 }
 @media screen and (max-width: 767px){
 	aside img{
