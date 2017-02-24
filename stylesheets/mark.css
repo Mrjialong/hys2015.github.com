@@ -1,4 +1,7 @@
 @media screen and (min-width:768px){
+	*{
+		font-family: "微软雅黑","宋体";
+	}
 	header a.blog {
 		color: #fff;
 		top: 79px;
@@ -71,6 +74,20 @@
 	.weather-content #degree{
 		font-size: 2em;
 		font-style:bold;
+	}
+	/* ---- particles.js container ----
+	 */
+
+	#particles-js{
+	  width: 100%;
+	  height: 100%;
+	  background-color: #fafafa;
+	  background-image: url('');
+	  background-size: cover;
+	  background-position: 50% 50%;
+	  background-repeat: no-repeat;
+	  z-index: -100;
+	  position: absolute;
 	}
 }
 @media screen and (max-width: 767px){
