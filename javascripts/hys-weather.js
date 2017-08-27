@@ -21,6 +21,11 @@ function createCORSRequest(method, url) {
   }
   return xhr;
 }
+
+var errorHandler = function() {
+	alert('啊哦，天气插件出了点状况，不影响您的浏览');
+};
+// html 当前天气
 function renderingNowWeatherInfo(cname, degree, condi, condi_code, dir, sc){
 	document.getElementById("cname").innerHTML = cname;
 	document.getElementById("degree").innerHTML = degree;
@@ -29,40 +34,8 @@ function renderingNowWeatherInfo(cname, degree, condi, condi_code, dir, sc){
 	document.getElementById("condi-img").src = imgurl;
 	document.getElementById("winddir").innerHTML = dir;
 	document.getElementById("windsc").innerHTML = sc;
-
 }
-function nowInfoHandler(){
-	var xhr = this;
-	var text = JSON.parse(xhr.responseText);
-	var weatherInfo = text.HeWeather5[0];
-	var cname = weatherInfo.basic.city;
-	var degree = weatherInfo.now.tmp;
-	var condi = weatherInfo.now.cond.txt;
-	var condi_code = weatherInfo.now.cond.code;
-	var dir = weatherInfo.now.wind.dir;
-	var sc = weatherInfo.now.wind.sc + '级';
-	renderingNowWeatherInfo(cname, degree, condi, condi_code, dir, sc);
-}
-var errorHandler = function() {
-	alert('啊哦，天气插件出了点状况，不影响您的浏览');
-};
-//Core Func
-function getWeatherInfo(api, eventHandlerFunc){
-	var cityname = 'beijing'
-	cityname = returnCitySN['cname'];
-	var url = 'https://free-api.heweather.com/v5/'+api+'?city='+ cityname + '&key=f45e249ccc4c42e58fc5f733d1f250bd'
-	var xhr = createCORSRequest("GET", url);
-	if (!xhr) {
-	  throw new Error('CORS not supported');
-	}
-	// Response handlers.
-	xhr.onload = eventHandlerFunc;
-	xhr.onerror = errorHandler;
-	xhr.send();
-}
-function getAndRenderNowWeatherInfo(){
-	getWeatherInfo("now", nowInfoHandler);
-}
+// html 预报天气
 function renderForecastInfo(foreCastInfo){
 	var forecastPanel = document.getElementById("forecast");
 	var days = ['今天', '明天', '后天'];
@@ -80,16 +53,63 @@ function renderForecastInfo(foreCastInfo){
 		forecastPanel.appendChild(newp);
 	}
 }
+// 排版信息
+function nowInfoHandler(){
+	var xhr = this;
+	var text = JSON.parse(xhr.responseText);
+	var weatherInfo = text.HeWeather5[0];
+	if(weatherInfo.status == 'unknown city') return;
+	var cname = weatherInfo.basic.city;
+	var degree = weatherInfo.now.tmp;
+	var condi = weatherInfo.now.cond.txt;
+	var condi_code = weatherInfo.now.cond.code;
+	var dir = weatherInfo.now.wind.dir;
+	var sc = weatherInfo.now.wind.sc + '级';
+	renderingNowWeatherInfo(cname, degree, condi, condi_code, dir, sc);
+}
 function forecastInfoHandler(){
 	var xhr = this;
 	var text = JSON.parse(xhr.responseText);
 	var weatherInfo = text.HeWeather5[0];
 	renderForecastInfo(weatherInfo);
 }
+
+
+
+
+//查询 当前/预报 天气信息
+function getWeatherInfo(api, eventHandlerFunc){
+	//cityname = returnCitySN['cname'];
+	var url = 'https://free-api.heweather.com/v5/'+api+'?city='+ cityname + '&key=f45e249ccc4c42e58fc5f733d1f250bd'
+	var xhr = createCORSRequest("GET", url);
+	if (!xhr) {
+	  throw new Error('CORS not supported');
+	}
+	// Response handlers.
+	xhr.onload = eventHandlerFunc;
+	xhr.onerror = errorHandler;
+	xhr.send();
+}
+function getAndRenderNowWeatherInfo(){
+	getWeatherInfo("now", nowInfoHandler);
+}
 function getAndRenderForcastWeatherInfo(){
 	getWeatherInfo("forecast", forecastInfoHandler);
 }
-function hys_Weather(){
+
+var cityname = undefined;
+function cnameFun(result){
+	cityname = result.name;
+	//成功获取地址才会进行天气查询
 	getAndRenderNowWeatherInfo();
 	getAndRenderForcastWeatherInfo();
 }
+
+function getCityName(){
+	var myCity = new BMap.LocalCity();
+	myCity.get(cnameFun);
+}
+function hys_Weather(){
+	getCityName();
+}
+
