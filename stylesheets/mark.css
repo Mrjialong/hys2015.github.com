@@ -28,11 +28,12 @@
 	div.avatar-wrap{
 		margin-top: 3em;
 	}
-	aside img{
+	div.avatar-wrap img{
 		padding: 2px;
-		border: 2px solid #999;
+		/*border: 2px solid #999;
 		width: 70px;
-		height: 70px;
+		height: 90px;
+		*/
 	}
 	body a:hover{
 		text-decoration:underline;
@@ -76,7 +77,7 @@
 @media screen and (max-width: 767px){
 	aside img{
 		height:40px;
-		width: 40px;
+		width: 60px;
 	}
 	/*weather style*/
 	.weather-content *{
