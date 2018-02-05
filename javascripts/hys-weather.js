@@ -25,12 +25,15 @@ function createCORSRequest(method, url) {
 var errorHandler = function() {
 	alert('啊哦，天气插件出了点状况，不影响您的浏览');
 };
+
+var iconRootURL = "http://cdn.heweather.com/";
+
 // html 当前天气
 function renderingNowWeatherInfo(cname, degree, condi, condi_code, dir, sc){
 	document.getElementById("cname").innerHTML = cname;
 	document.getElementById("degree").innerHTML = degree;
 	document.getElementById("condi").innerHTML = condi;
-	var imgurl = "http://files.heweather.com/cond_icon/" + condi_code + ".png";
+	var imgurl = iconRootURL + "/cond_icon/" + condi_code + ".png";
 	document.getElementById("condi-img").src = imgurl;
 	document.getElementById("winddir").innerHTML = dir;
 	document.getElementById("windsc").innerHTML = sc;
@@ -45,7 +48,7 @@ function renderForecastInfo(foreCastInfo){
 		newp.innerHTML = days[i] + ' ' + dayiInfo.cond.txt_d;
 		var condi_img = document.createElement("img");
 		var condi_code = dayiInfo.cond.code_d;
-		condi_img.src = "http://files.heweather.com/cond_icon/" + condi_code + ".png";
+		condi_img.src = iconRootURL + "/cond_icon/" + condi_code + ".png";
 		condi_img.className = "condi-img"
 		newp.appendChild(condi_img);
 		var tmp_txt = document.createTextNode(dayiInfo.tmp.min + '°C~ ' + dayiInfo.tmp.max + '°C ');
