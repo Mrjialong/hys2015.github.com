@@ -9,7 +9,11 @@
 		line-height: 2.5;
 		width: 191px;
 		text-align: center;
-		background: #2D2B17;
+		background: -webkit-linear-gradient(#2D2B17, #5c5832); /* Safari 5.1 - 6.0 */
+		background: -o-linear-gradient(#2D2B17, #5c5832); /* Opera 11.1 - 12.0 */
+		background: -moz-linear-gradient(#2D2B17, #5c5832); /* Firefox 3.6 - 15 */
+		background: linear-gradient(#2D2B17, #5c5832); /* 标准的语法 */
+		/* background: #2D2B17; */
 		border-radius: 0 0 30px 30px;
 		animation: mymove 1s ease-in;
 		-webkit-animation: mymove 1s ease-in;
